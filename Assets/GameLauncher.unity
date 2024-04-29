@@ -275,6 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1109430583}
+  - component: {fileID: 1109430584}
   m_Layer: 0
   m_Name: Game Framework
   m_TagString: Untagged
@@ -299,6 +300,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1109430584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109430582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d09b8a3e8c0e7e4dbcfd2fa52bf69ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1455819299
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnableCachedAssets: 1
-  m_LoadAssetCountPerFrame: 1
+  m_LoadAssetCountPerFrame: 100
   m_MinLoadAssetRandomDelaySeconds: 0
   m_MaxLoadAssetRandomDelaySeconds: 0
 --- !u!114 &1905892396701055188

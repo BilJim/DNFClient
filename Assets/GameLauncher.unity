@@ -505,8 +505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959bca2b68d03954897f38b1dbb00303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AvailableProcedureTypeNames: []
-  m_EntranceProcedureTypeName: 
+  m_AvailableProcedureTypeNames:
+  - ProcedureLaunch
+  - ProcedurePreload
+  - ProcedureSplash
+  m_EntranceProcedureTypeName: ProcedureLaunch
 --- !u!114 &1905892396700999902
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,11 +39,19 @@ public class ProcedurePreload : ProcedureBase
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+        //所有数据项都加载完成才能切流程
+        foreach (KeyValuePair<string, bool> loadedFlag in m_LoadedFlag)
+        {
+            if (!loadedFlag.Value)
+                return;
+        }
+        procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Hall"));
+        ChangeState<ProcedureChangeScene>(procedureOwner);
     }
 
     private void PreloadResources()
     {
-        // Preload configs
+        // 加载全局配置
         LoadConfig("DefaultConfig");
 
         // Preload data tables
@@ -59,14 +67,16 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadConfig(string configName)
     {
-        
+        string configAssetName = AssetUtility.GetConfigAsset(configName, false);
+        m_LoadedFlag.Add(configAssetName, false);
+        GameEntry.Config.ReadData(configAssetName, this);
     }
 
     private void LoadDataTable(string dataTableName)
     {
         //从二进制文件中加载数据
         string dataTableAssetName = AssetUtility.GetDataTableAsset(dataTableName, true);
-        m_LoadedFlag.Add(dataTableName, false);
+        m_LoadedFlag.Add(dataTableAssetName, false);
         GameEntry.DataTable.LoadDataTable(dataTableName, dataTableAssetName, this);
     }
 

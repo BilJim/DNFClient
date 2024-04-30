@@ -1,5 +1,8 @@
 ﻿using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
+/// <summary>
+/// 启动流程
+/// </summary>
 public class ProcedureLaunch : ProcedureBase
 {
 

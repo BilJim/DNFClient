@@ -2,16 +2,17 @@ using GameFramework;
 
 public static class AssetUtility
 {
+    
+    //加载配置项路径
+    public static string GetConfigAsset(string assetName, bool fromBytes)
+    {
+        return Utility.Text.Format("Assets/GameMain/Configs/{0}.{1}", assetName, fromBytes ? "bytes" : "txt");
+    }
+    
     //加载预制体路径
     public static string GetEntityAsset(string assetName)
     {
         return $"Assets/GameMain/Entities/{assetName}.prefab";
-    }
-    
-    //加载场景路径
-    public static string GetSceneAsset(string assetName)
-    {
-        return $"Assets/GameMain/Scenes/{assetName}.unity";
     }
     
     /// <summary>

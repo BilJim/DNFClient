@@ -24,6 +24,7 @@ public static class DataTableExtension
             return;
         }
 
+        //不能有下划线 _
         string[] splitedNames = dataTableName.Split('_');
         if (splitedNames.Length > 2)
         {
@@ -33,11 +34,16 @@ public static class DataTableExtension
 
         
         string dataRowClassName;
+        //针对有父文件夹的数据表的处理，例如: UI/UIForm
+        int splitIndex = splitedNames[0].LastIndexOf("/");
+        splitIndex = splitIndex < 0 ? 0 : splitIndex + 1;
+        string originTableName = splitedNames[0].Substring(splitIndex);
         //针对于命名空间的处理
         string[] splitStr = DataRowClassPrefixName.Split(".");
-        if (string.IsNullOrWhiteSpace(splitStr[0]))dataRowClassName = splitStr[1] + splitedNames[0];
+        if (string.IsNullOrWhiteSpace(splitStr[0]))
+            dataRowClassName = splitStr[1] + originTableName;
         else
-            dataRowClassName = DataRowClassPrefixName + splitedNames[0];
+            dataRowClassName = DataRowClassPrefixName + originTableName;
         
         Type dataRowType = Type.GetType(dataRowClassName);
         if (dataRowType == null)

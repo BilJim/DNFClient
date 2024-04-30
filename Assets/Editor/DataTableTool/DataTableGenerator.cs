@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using GameFramework;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -27,8 +28,15 @@ public sealed class DataTableGenerator
     private static readonly Regex EndWithNumberRegex = new Regex(@"\d+$");
     private static readonly Regex NameRegex = new Regex(@"^[A-Z][A-Za-z0-9_]*$");
 
-    public static DataTableProcessor CreateDataTableProcessor(string dataTableName)
+    public static DataTableProcessor CreateDataTableProcessor(TextAsset textAsset)
     {
+        string relativePath = GetRelativePath(textAsset);
+        string dataTableName;
+        if (relativePath == null)
+            dataTableName = textAsset.name;
+        else
+            dataTableName = relativePath + textAsset.name;
+        
         return new DataTableProcessor(Utility.Path.GetRegularPath(Path.Combine(DataTablePath, dataTableName + ".txt")), Encoding.GetEncoding("GB2312"), 1, 2, null, 3, 4, 1);
     }
 
@@ -52,28 +60,61 @@ public sealed class DataTableGenerator
         return true;
     }
 
-    public static void GenerateDataFile(DataTableProcessor dataTableProcessor, string dataTableName)
+    public static void GenerateDataFile(DataTableProcessor dataTableProcessor, TextAsset textAsset)
     {
-        string binaryDataFileName = Utility.Path.GetRegularPath(Path.Combine(DataTablePath, dataTableName + ".bytes"));
+        //相对路径下的文件名
+        string relativePathName = GetRelativePath(textAsset);
+        if (relativePathName == null)
+            return;
+
+        string binaryDataFileName = Utility.Path.GetRegularPath(Path.Combine(DataTablePath, relativePathName + textAsset.name + ".bytes"));
         if (!dataTableProcessor.GenerateDataFile(binaryDataFileName) && File.Exists(binaryDataFileName))
         {
             File.Delete(binaryDataFileName);
         }
     }
 
-    public static void GenerateCodeFile(DataTableProcessor dataTableProcessor, string dataTableName)
+    public static void GenerateCodeFile(DataTableProcessor dataTableProcessor, TextAsset textAsset)
     {
+        var dataTableName = textAsset.name;
+        //相对路径下的文件名
+        string relativePathName = GetRelativePath(textAsset);
+        if (relativePathName == null)
+            return;
+        
         if (HasNamespace())
             dataTableProcessor.SetCodeTemplate(CSharpCodeTemplateFileWithNamespacePath, Encoding.UTF8);
         else
             dataTableProcessor.SetCodeTemplate(CSharpCodeTemplateFilePath, Encoding.UTF8);
         dataTableProcessor.SetCodeGenerator(DataTableCodeGenerator);
 
-        string csharpCodeFileName = Utility.Path.GetRegularPath(Path.Combine(CSharpCodePath, $"{CSharpFilePrefix}{dataTableName}.cs"));
-        if (!dataTableProcessor.GenerateCodeFile(csharpCodeFileName, Encoding.UTF8, dataTableName) && File.Exists(csharpCodeFileName))
+        string csharpCodeFileName = Utility.Path.GetRegularPath(Path.Combine(CSharpCodePath, $"{relativePathName}{CSharpFilePrefix}{dataTableName}.cs"));
+        //判断文件夹是否存在，若不存在主要要创建文件夹
+        string foldPath = Path.Combine(CSharpCodePath, relativePathName);
+        if (!Directory.Exists(foldPath))
+            Directory.CreateDirectory(foldPath);
+        if (!dataTableProcessor.GenerateCodeFile(csharpCodeFileName, Encoding.UTF8, textAsset.name) && File.Exists(csharpCodeFileName))
         {
             File.Delete(csharpCodeFileName);
         }
+    }
+
+    /// <summary>
+    /// 获取文件相对路径下的文件名
+    /// Assets/GameMain/DataTables/UI/UIForm.txt -> "UI/"
+    /// Assets/GameMain/DataTables/BaseTable.txt -> ""
+    /// </summary>
+    /// <returns></returns>
+    public static string GetRelativePath(TextAsset textAsset)
+    {
+        string assetPath = AssetDatabase.GetAssetPath(textAsset);
+        if (!assetPath.Contains(DataTablePath))
+        {
+            Debug.LogError($"当前数据表位置路径不规范: {textAsset.name}");
+            return null;
+        }
+        //相对路径下的文件名
+        return assetPath.Replace(DataTablePath + "/", "").Replace($"{textAsset.name}.txt", "");
     }
 
     private static void DataTableCodeGenerator(DataTableProcessor dataTableProcessor, StringBuilder codeContent, object userData)

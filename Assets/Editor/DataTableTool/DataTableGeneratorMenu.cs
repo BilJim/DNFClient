@@ -15,15 +15,15 @@ public class DataTableGeneratorMenu
             //过滤非文本类型的资源
             if (item.GetType() != typeof(TextAsset))
                 continue;
-            DataTableProcessor dataTableProcessor = DataTableGenerator.CreateDataTableProcessor(item.name);
+            DataTableProcessor dataTableProcessor = DataTableGenerator.CreateDataTableProcessor(item as TextAsset);
             if (!DataTableGenerator.CheckRawData(dataTableProcessor, item.name))
             {
                 Debug.LogError($"检查原始数据失败. DataTableName: {item.name}");
                 break;
             }
             
-            DataTableGenerator.GenerateDataFile(dataTableProcessor, item.name);
-            DataTableGenerator.GenerateCodeFile(dataTableProcessor, item.name);
+            DataTableGenerator.GenerateDataFile(dataTableProcessor, item as TextAsset);
+            DataTableGenerator.GenerateCodeFile(dataTableProcessor, item as TextAsset);
         }
         AssetDatabase.Refresh();
     }

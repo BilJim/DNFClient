@@ -5,20 +5,6 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 
 public class ProcedurePreload : ProcedureBase
 {
-    public static readonly string[] DataTableNames = new string[]
-    {
-        "Aircraft",
-        "Armor",
-        "Asteroid",
-        "Entity",
-        "Music",
-        "Scene",
-        "Sound",
-        "Thruster",
-        "UIForm",
-        "UISound",
-        "Weapon",
-    };
 
     private Dictionary<string, bool> m_LoadedFlag = new Dictionary<string, bool>();
 
@@ -61,10 +47,8 @@ public class ProcedurePreload : ProcedureBase
         LoadConfig("DefaultConfig");
 
         // Preload data tables
-        foreach (string dataTableName in DataTableNames)
-        {
-            LoadDataTable(dataTableName);
-        }
+        //首先先加载基础表，基础表加载成功后继续加载需要加载的记录的其他表
+        LoadDataTable("BaseTable");
 
         // Preload dictionaries
         LoadDictionary("Default");
@@ -80,7 +64,10 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadDataTable(string dataTableName)
     {
-        
+        //从二进制文件中加载数据
+        string dataTableAssetName = AssetUtility.GetDataTableAsset(dataTableName, true);
+        m_LoadedFlag.Add(dataTableName, false);
+        GameEntry.DataTable.LoadDataTable(dataTableName, dataTableAssetName, this);
     }
 
     private void LoadDictionary(string dictionaryName)
@@ -126,6 +113,15 @@ public class ProcedurePreload : ProcedureBase
 
         m_LoadedFlag[ne.DataTableAssetName] = true;
         Log.Info("Load data table '{0}' OK.", ne.DataTableAssetName);
+        //继续加载其余的表
+        if (ne.DataTableAssetName.Contains("BaseTable"))
+        {
+            List<string> needLoadTabs = GameEntry.DataTable.GetDataTable<DTBaseTable>().GetDataRow(0).TableNames;
+            foreach (string dataTableName in needLoadTabs)
+            {
+                LoadDataTable(dataTableName);
+            }
+        }
     }
 
     private void OnLoadDataTableFailure(object sender, GameEventArgs e)

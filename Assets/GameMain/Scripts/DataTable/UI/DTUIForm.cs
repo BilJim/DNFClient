@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2024-04-30 15:31:58.144
+// 生成时间：2024-04-30 15:54:57.871
 //------------------------------------------------------------
 
 using GameFramework;
@@ -12,14 +12,14 @@ using UnityEngine;
 using UnityGameFramework.Runtime;
 
 /// <summary>
-/// 数据表。
+/// 界面配置表。
 /// </summary>
-public class DTBaseTable : DataRowBase
+public class DTUIForm : DataRowBase
 {
     private int m_Id = 0;
 
     /// <summary>
-    /// 获取编号。
+    /// 获取界面编号。
     /// </summary>
     public override int Id
     {
@@ -30,9 +30,36 @@ public class DTBaseTable : DataRowBase
     }
 
 	/// <summary>
-	/// 获取要加载的数据表。
+	/// 获取资源名称。
 	/// </summary>
-	public List<string> TableNames
+	public string AssetName
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取界面组名称。
+	/// </summary>
+	public string UIGroupName
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取是否允许多个界面实例。
+	/// </summary>
+	public bool AllowMultiInstance
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取是否暂停被其覆盖的界面。
+	/// </summary>
+	public bool PauseCoveredUIForm
 	{
 		get;
 		private set;
@@ -50,7 +77,10 @@ public class DTBaseTable : DataRowBase
 		index++;
 		m_Id = int.Parse(columnStrings[index++]);
 		index++;
-		TableNames = DataTableExtension.ParseStringList(columnStrings[index++]);
+		AssetName = columnStrings[index++];
+		UIGroupName = columnStrings[index++];
+		AllowMultiInstance = bool.Parse(columnStrings[index++]);
+		PauseCoveredUIForm = bool.Parse(columnStrings[index++]);
 
 		GeneratePropertyArray();
 		return true;
@@ -63,7 +93,10 @@ public class DTBaseTable : DataRowBase
 			using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
 			{
 				m_Id = binaryReader.Read7BitEncodedInt32();
-				TableNames = binaryReader.ReadStringList();
+				AssetName = binaryReader.ReadString();
+				UIGroupName = binaryReader.ReadString();
+				AllowMultiInstance = binaryReader.ReadBoolean();
+				PauseCoveredUIForm = binaryReader.ReadBoolean();
 			}
 		}
 

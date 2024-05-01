@@ -6,6 +6,7 @@ using UnityEngine;
 
 /// <summary>
 /// 绑定 UI 元素
+/// 注意，在已有预制体的情况下。如果只进行元素绑定操作，那么预制体并不会关联更新。需要手动修改其他项触发更新操作
 /// </summary>
 public class UIElementBind : Editor
 {
@@ -35,5 +36,6 @@ public class UIElementBind : Editor
             GameObject uiObject = EditorUtility.InstanceIDToObject(item.instId) as GameObject;
             fieldItem.SetValue(uiForm, uiObject.GetComponent(item.fieldType));
         }
+        AssetDatabase.Refresh( );
     }
 }

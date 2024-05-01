@@ -52,6 +52,7 @@ namespace UnityGameFramework.Runtime
 
         /// <summary>
         /// 获取加载场景进度。
+        /// Unity 场景加载进度只会从 0-0.9 超过0.9即为加载完成
         /// </summary>
         public float Progress
         {

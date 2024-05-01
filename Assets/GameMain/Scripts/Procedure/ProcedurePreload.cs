@@ -45,6 +45,7 @@ public class ProcedurePreload : ProcedureBase
             if (!loadedFlag.Value)
                 return;
         }
+        //首先加载大厅场景
         procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Hall"));
         ChangeState<ProcedureChangeScene>(procedureOwner);
     }

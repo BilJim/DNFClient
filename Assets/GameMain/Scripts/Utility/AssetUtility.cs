@@ -9,12 +9,6 @@ public static class AssetUtility
         return Utility.Text.Format("Assets/GameMain/Configs/{0}.{1}", assetName, fromBytes ? "bytes" : "txt");
     }
     
-    //加载预制体路径
-    public static string GetEntityAsset(string assetName)
-    {
-        return $"Assets/GameMain/Entities/{assetName}.prefab";
-    }
-    
     /// <summary>
     /// 数据表文本所在路径
     /// </summary>

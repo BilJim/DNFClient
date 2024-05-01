@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2024-04-30 18:53:02.308
+// 生成时间：2024-05-01 10:05:53.498
 //------------------------------------------------------------
 
 using GameFramework;
@@ -57,6 +57,15 @@ public class DTScene : DataRowBase
 	}
 
 	/// <summary>
+	/// 获取默认要打开的UI表单，0 表示无。
+	/// </summary>
+	public int DefaultFormId
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
 	/// 获取所属流程类。通过反射切换不同场景流程。
 	/// </summary>
 	public string TypeStr
@@ -80,6 +89,7 @@ public class DTScene : DataRowBase
 		AssetName = columnStrings[index++];
 		AssetPath = columnStrings[index++];
 		BackgroundMusicId = int.Parse(columnStrings[index++]);
+		DefaultFormId = int.Parse(columnStrings[index++]);
 		TypeStr = columnStrings[index++];
 
 		GeneratePropertyArray();
@@ -96,6 +106,7 @@ public class DTScene : DataRowBase
 				AssetName = binaryReader.ReadString();
 				AssetPath = binaryReader.ReadString();
 				BackgroundMusicId = binaryReader.Read7BitEncodedInt32();
+				DefaultFormId = binaryReader.Read7BitEncodedInt32();
 				TypeStr = binaryReader.ReadString();
 			}
 		}

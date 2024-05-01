@@ -318,6 +318,8 @@ namespace UnityGameFramework.Runtime
             Transform transform = uiGroupHelper.transform;
             transform.SetParent(m_InstanceRoot);
             transform.localScale = Vector3.one;
+            //不能让 Helper 的坐标和缩放影响改变 Group 的 Position
+            transform.localPosition = Vector3.zero;
 
             return m_UIManager.AddUIGroup(uiGroupName, depth, uiGroupHelper);
         }

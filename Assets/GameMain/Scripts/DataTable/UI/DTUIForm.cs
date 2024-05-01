@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2024-04-30 15:54:57.871
+// 生成时间：2024-05-01 09:50:00.265
 //------------------------------------------------------------
 
 using GameFramework;
@@ -33,6 +33,15 @@ public class DTUIForm : DataRowBase
 	/// 获取资源名称。
 	/// </summary>
 	public string AssetName
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取资源路径。
+	/// </summary>
+	public string AssetPath
 	{
 		get;
 		private set;
@@ -78,6 +87,7 @@ public class DTUIForm : DataRowBase
 		m_Id = int.Parse(columnStrings[index++]);
 		index++;
 		AssetName = columnStrings[index++];
+		AssetPath = columnStrings[index++];
 		UIGroupName = columnStrings[index++];
 		AllowMultiInstance = bool.Parse(columnStrings[index++]);
 		PauseCoveredUIForm = bool.Parse(columnStrings[index++]);
@@ -94,6 +104,7 @@ public class DTUIForm : DataRowBase
 			{
 				m_Id = binaryReader.Read7BitEncodedInt32();
 				AssetName = binaryReader.ReadString();
+				AssetPath = binaryReader.ReadString();
 				UIGroupName = binaryReader.ReadString();
 				AllowMultiInstance = binaryReader.ReadBoolean();
 				PauseCoveredUIForm = binaryReader.ReadBoolean();

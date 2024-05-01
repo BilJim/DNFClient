@@ -5,10 +5,11 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 /// <summary>
 /// 大厅流程
 /// </summary>
-public class ProcedureHall : ProcedureBase
+public class ProcedureHall : ProcedureBaseScene
 {
     private bool m_StartGame = false;
-    // private MenuForm m_MenuForm = null;
+    
+    private RoleCreateForm m_HallForm = null;
 
     public void StartGame()
     {
@@ -22,7 +23,9 @@ public class ProcedureHall : ProcedureBase
         GameEntry.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
         m_StartGame = false;
-        // GameEntry.UI.OpenUIForm(UIFormId.MenuForm, this);
+        m_formId = GetCurrentSceneData().DefaultFormId;
+        //打开默认UI表单
+        OpenUIForm(m_formId);
     }
 
     protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
@@ -31,11 +34,11 @@ public class ProcedureHall : ProcedureBase
 
         GameEntry.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
-        // if (m_MenuForm != null)
-        // {
-        //     m_MenuForm.Close(isShutdown);
-        //     m_MenuForm = null;
-        // }
+        if (m_HallForm != null)
+        {
+            m_HallForm.Close(isShutdown);
+            m_HallForm = null;
+        }
     }
 
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -56,6 +59,6 @@ public class ProcedureHall : ProcedureBase
         if (ne.UserData != this)
             return;
 
-        // m_MenuForm = (MenuForm)ne.UIForm.Logic;
+        m_HallForm = (RoleCreateForm)ne.UIForm.Logic;
     }
 }

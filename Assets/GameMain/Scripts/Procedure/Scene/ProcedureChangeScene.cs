@@ -7,12 +7,8 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 /// 场景切换流程
 /// 场景和流程一一对应
 /// </summary>
-public class ProcedureChangeScene : ProcedureBase
+public class ProcedureChangeScene : ProcedureBaseScene
 {
-    private bool m_IsChangeSceneComplete = false;
-    private int m_BackgroundMusicId = 0;
-    //下一个场景的 sceneId
-    private int m_nextSceneId;
 
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {

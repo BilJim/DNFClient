@@ -4,7 +4,7 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 /// <summary>
 /// 游戏流程
 /// </summary>
-public class ProcedureGame : ProcedureBase
+public class ProcedureBattle : ProcedureBase
 {
     private const float GameOverDelayedSeconds = 2f;
 

@@ -606,8 +606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AvailableProcedureTypeNames:
+  - ProcedureBattle
   - ProcedureChangeScene
-  - ProcedureGame
   - ProcedureHall
   - ProcedureLaunch
   - ProcedureMenu

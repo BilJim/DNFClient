@@ -11,6 +11,9 @@ public class ProcedureHall : ProcedureBaseScene
     
     private RoleCreateForm m_HallForm = null;
 
+    /// <summary>
+    /// 开始游戏/进入游戏
+    /// </summary>
     public void StartGame()
     {
         m_StartGame = true;
@@ -25,7 +28,7 @@ public class ProcedureHall : ProcedureBaseScene
         m_StartGame = false;
         m_formId = GetCurrentSceneData().DefaultFormId;
         //打开默认UI表单
-        OpenUIForm(m_formId);
+        OpenUIForm(m_formId, this);
     }
 
     protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
@@ -47,8 +50,7 @@ public class ProcedureHall : ProcedureBaseScene
 
         if (m_StartGame)
         {
-            procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Main"));
-            // procedureOwner.SetData<VarByte>("GameMode", (byte)GameMode.Survival);
+            procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Battle"));
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }
     }

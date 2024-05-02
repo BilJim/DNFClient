@@ -20,11 +20,15 @@ public abstract class ProcedureBaseScene : ProcedureBase
     protected bool m_IsChangeSceneComplete = false;
     //场景背景音乐
     protected int m_BackgroundMusicId = 0;
-    //场景UI界面ID
+    //场景默认 UI表单ID
     protected int m_formId;
+    //加载表单ID
+    protected int m_loadingFormId = 50;
+    //创建UI加载表单时生成的 SerialId
+    protected int loadingFormSerialId;
 
     //UI 组件
-    private UIComponent uiComponent;
+    protected UIComponent uiComponent;
 
     protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
     {
@@ -83,7 +87,9 @@ public abstract class ProcedureBaseScene : ProcedureBase
                 return;
         }
 
-        uiComponent.OpenUIForm(formData.AssetPath, formData.UIGroupName, Constant.AssetPriority.UIFormAsset,
+        loadingFormSerialId = uiComponent.OpenUIForm(formData.AssetPath, formData.UIGroupName, Constant.AssetPriority.UIFormAsset,
             formData.PauseCoveredUIForm, userData);
     }
+    
+    
 }

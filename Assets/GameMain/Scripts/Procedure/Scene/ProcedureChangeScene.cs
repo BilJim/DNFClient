@@ -1,4 +1,5 @@
-﻿using GameFramework.DataTable;
+﻿using GameFramework;
+using GameFramework.DataTable;
 using GameFramework.Event;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
@@ -9,6 +10,8 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 /// </summary>
 public class ProcedureChangeScene : ProcedureBaseScene
 {
+
+    private LoadingParams m_loadingParams;
 
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
@@ -51,6 +54,10 @@ public class ProcedureChangeScene : ProcedureBaseScene
         //加载场景
         GameEntry.Scene.LoadScene(sceneData.AssetPath, Constant.AssetPriority.SceneAsset, this);
         m_BackgroundMusicId = sceneData.BackgroundMusicId;
+        //弹出场景加载表单
+        //打开默认UI表单
+        m_loadingParams = LoadingParams.Create(null);
+        OpenUIForm(m_loadingFormId, m_loadingParams);
     }
 
     protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
@@ -61,15 +68,19 @@ public class ProcedureChangeScene : ProcedureBaseScene
         GameEntry.Event.Unsubscribe(LoadSceneDependencyAssetEventArgs.EventId, OnLoadSceneDependencyAsset);
 
         base.OnLeave(procedureOwner, isShutdown);
+
+        ReferencePool.Release(m_loadingParams);
     }
 
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
-        if (!m_IsChangeSceneComplete)
+        if (!m_IsChangeSceneComplete || !m_loadingParams.LoadingComplete)
             return;
-
+        
+        //关闭UI加载表单
+        uiComponent.CloseUIForm(loadingFormSerialId);
         //切换场景
         ChangeScene(m_nextSceneId);
     }
@@ -106,6 +117,7 @@ public class ProcedureChangeScene : ProcedureBaseScene
             return;
 
         Log.Info("Load scene '{0}' update, progress '{1}'.", ne.SceneAssetName, ne.Progress.ToString("P2"));
+        m_loadingParams.Progress = ne.Progress;
     }
 
     private void OnLoadSceneDependencyAsset(object sender, GameEventArgs e)

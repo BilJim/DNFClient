@@ -591,7 +591,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BF7\u8F93\u5165\u540D\u5B57"
+  m_Text: CreateRole.PlayerNamePlaceholder
 --- !u!1 &7537957597742099229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,4 +1095,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u89D2\u827215\u5F00\u542F\u8F6C\u804C\uFF0C\u8F6C\u804C\u524D\u80FD\u4F53\u9A8C\u6240\u9009\u804C\u4E1A\u6838\u5FC3\u6280\u80FD"
+  m_Text: CreateRole.TextPrompt

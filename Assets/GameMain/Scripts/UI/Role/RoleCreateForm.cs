@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameFramework.DataNode;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
@@ -15,6 +16,7 @@ public class RoleCreateForm : UGuiForm
     {
         close.onClick.AddListener(OnCloseButtonClick);
         enterGame.onClick.AddListener(OnEnterGameButtonClick);
+        playerName.onEndEdit.AddListener(OnNameInputEnd);
     }
 
     protected override void OnOpen(object userData)
@@ -42,5 +44,12 @@ public class RoleCreateForm : UGuiForm
 
     public void OnCloseButtonClick()
     {
+    }
+
+    public void OnNameInputEnd(string text)
+    {
+        //通过数据节点设置玩家姓名
+        IDataNode dataNode = GameEntry.DataNode.GetOrAddNode("Player");
+        dataNode.GetOrAddChild("Name").SetData<VarString>(text);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameFramework.Event;
+using GameFramework.Resource;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
@@ -55,14 +57,13 @@ public class ProcedurePreload : ProcedureBase
         // 加载全局配置
         LoadConfig("DefaultConfig");
 
-        // Preload data tables
         //首先先加载基础表，基础表加载成功后继续加载需要加载的记录的其他表
         LoadDataTable("BaseTable");
 
-        // Preload dictionaries
-        LoadDictionary("Default");
+        //加载本地化语言
+        LoadLocalization("Default");
 
-        // Preload fonts
+        //统一设置字体
         LoadFont("MainFont");
     }
 
@@ -81,14 +82,28 @@ public class ProcedurePreload : ProcedureBase
         GameEntry.DataTable.LoadDataTable(dataTableName, dataTableAssetName, this);
     }
 
-    private void LoadDictionary(string dictionaryName)
+    private void LoadLocalization(string dictionaryName)
     {
-        
+        string dictionaryAssetName = AssetUtility.GetDictionaryAsset(dictionaryName, false);
+        m_LoadedFlag.Add(dictionaryAssetName, false);
+        GameEntry.Localization.ReadData(dictionaryAssetName, this);
     }
 
     private void LoadFont(string fontName)
     {
-        
+        m_LoadedFlag.Add($"Font.{fontName}", false);
+        GameEntry.Resource.LoadAsset(AssetUtility.GetFontAsset(fontName), Constant.AssetPriority.FontAsset, new LoadAssetCallbacks(
+            (assetName, asset, duration, userData) =>
+            {
+                m_LoadedFlag[$"Font.{fontName}"] = true;
+                UGuiForm.SetMainFont((Font)asset);
+                Log.Info("Load font '{0}' OK.", fontName);
+            },
+
+            (assetName, status, errorMessage, userData) =>
+            {
+                Log.Error("Can not load font '{0}' from '{1}' with error message '{2}'.", fontName, assetName, errorMessage);
+            }));
     }
 
     private void OnLoadConfigSuccess(object sender, GameEventArgs e)

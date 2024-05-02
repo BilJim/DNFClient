@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Dictionaries>
+  <Dictionary Language="ChineseSimplified">
+    <String Key="CreateRole.TextPrompt" Value="角色15开启转职，转职前能体验所选职业核心技能" />
+    <String Key="CreateRole.PlayerNamePlaceholder" Value="请输入名字" />
+  </Dictionary>
+</Dictionaries>

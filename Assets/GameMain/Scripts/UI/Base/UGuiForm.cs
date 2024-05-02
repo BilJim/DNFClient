@@ -79,11 +79,12 @@ public abstract class UGuiForm : UIFormLogic
         Text[] texts = GetComponentsInChildren<Text>(true);
         for (int i = 0; i < texts.Length; i++)
         {
-            texts[i].font = s_MainFont;
+            //避免不设置字体时，文字不显示
+            if (s_MainFont != null)
+                texts[i].font = s_MainFont;
             if (!string.IsNullOrEmpty(texts[i].text))
-            {
+                //本地化处理
                 texts[i].text = GameEntry.Localization.GetString(texts[i].text);
-            }
         }
     }
     

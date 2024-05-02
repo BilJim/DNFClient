@@ -1,4 +1,5 @@
-﻿using UnityGameFramework.Runtime;
+﻿using System.Collections.Generic;
+using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
 /// <summary>
@@ -8,28 +9,24 @@ public class ProcedureBattle : ProcedureBase
 {
     private const float GameOverDelayedSeconds = 2f;
 
-    // private readonly Dictionary<GameMode, GameBase> m_Games = new Dictionary<GameMode, GameBase>();
-    // private GameBase m_CurrentGame = null;
+    private readonly Dictionary<GameMode, GameBase> m_Games = new();
+    private GameBase m_CurrentGame = null;
     private bool m_GotoMenu = false;
     private float m_GotoMenuDelaySeconds = 0f;
 
+    /// <summary>
+    /// 回到菜单
+    /// </summary>
     public void GotoMenu()
     {
         m_GotoMenu = true;
     }
 
-    protected override void OnInit(ProcedureOwner procedureOwner)
-    {
-        base.OnInit(procedureOwner);
-
-        // m_Games.Add(GameMode.Survival, new SurvivalGame());
-    }
-
     protected override void OnDestroy(ProcedureOwner procedureOwner)
     {
         base.OnDestroy(procedureOwner);
-
-        // m_Games.Clear();
+        
+        m_Games.Clear();
     }
 
     protected override void OnEnter(ProcedureOwner procedureOwner)
@@ -37,18 +34,20 @@ public class ProcedureBattle : ProcedureBase
         base.OnEnter(procedureOwner);
 
         m_GotoMenu = false;
-        // GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
-        // m_CurrentGame = m_Games[gameMode];
-        // m_CurrentGame.Initialize();
+        GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
+        //新开始一个普通游戏
+        m_Games.Add(gameMode, new CommonGame());
+        m_CurrentGame = m_Games[gameMode];
+        m_CurrentGame.Initialize();
     }
 
     protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
     {
-        // if (m_CurrentGame != null)
-        // {
-        //     m_CurrentGame.Shutdown();
-        //     m_CurrentGame = null;
-        // }
+        if (m_CurrentGame != null)
+        {
+            m_CurrentGame.Shutdown();
+            m_CurrentGame = null;
+        }
 
         base.OnLeave(procedureOwner, isShutdown);
     }
@@ -57,11 +56,11 @@ public class ProcedureBattle : ProcedureBase
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
-        // if (m_CurrentGame != null && !m_CurrentGame.GameOver)
-        // {
-        //     m_CurrentGame.Update(elapseSeconds, realElapseSeconds);
-        //     return;
-        // }
+        if (m_CurrentGame != null && !m_CurrentGame.GameOver)
+        {
+            m_CurrentGame.Update(elapseSeconds, realElapseSeconds);
+            return;
+        }
 
         if (!m_GotoMenu)
         {

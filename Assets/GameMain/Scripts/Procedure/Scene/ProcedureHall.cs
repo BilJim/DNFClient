@@ -39,7 +39,7 @@ public class ProcedureHall : ProcedureBaseScene
 
         if (m_HallForm != null)
         {
-            m_HallForm.Close(isShutdown);
+            m_HallForm.Close(true);
             m_HallForm = null;
         }
     }
@@ -51,6 +51,7 @@ public class ProcedureHall : ProcedureBaseScene
         if (m_StartGame)
         {
             procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Battle"));
+            procedureOwner.SetData<VarByte>("GameMode", (byte)GameMode.Common);
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }
     }

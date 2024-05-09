@@ -1,4 +1,4 @@
-﻿using UnityGameFramework.Runtime;
+﻿using UnityEngine;
 
 public class CommonGame : GameBase
 {
@@ -9,12 +9,13 @@ public class CommonGame : GameBase
     public override void Initialize()
     {
         base.Initialize();
-        
-        // GameEntry.Entity.ShowEntity<>(new MyAircraftData(GameEntry.Entity.GenerateSerialId(), 10000)
-        // {
-        //     Name = "My Aircraft",
-        //     Position = Vector3.zero,
-        // });
+
+        GameEntry.Entity.ShowHeroEntity(typeof(Hero), "player", Constant.AssetPriority.HeroAsset,
+            new HeroData(GameEntry.Entity.GenerateSerialId(), 1)
+            {
+                Name = "My Aircraft",
+                Position = Vector3.zero,
+            });
         GameOver = false;
     }
 

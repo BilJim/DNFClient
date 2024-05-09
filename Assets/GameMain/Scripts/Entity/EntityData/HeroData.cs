@@ -2,17 +2,17 @@
 using UnityEngine;
 
 [Serializable]
-public class PlayerData : TargetableObjectData
+public class HeroData : TargetableObjectData
 {
     [SerializeField] private string m_Name = null;
 
-    public PlayerData(int entityId, int typeId)
+    public HeroData(int entityId, int typeId)
         : base(entityId, typeId, CampType.Player)
     {
     }
 
     /// <summary>
-    /// 角色名称。
+    /// 自定义玩家名
     /// </summary>
     public string Name
     {

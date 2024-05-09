@@ -15,6 +15,10 @@ public abstract class Entity : EntityLogic
 
     public Animation CachedAnimation { get; private set; }
 
+    /// <summary>
+    /// 注意，由于对象池的存在 Entity 会被重复使用，所以尽量不要在这里初始化数据，在 OnShow 中初始化数据
+    /// </summary>
+    /// <param name="userData"></param>
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);

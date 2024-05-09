@@ -84,9 +84,9 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadLocalization(string dictionaryName)
     {
-        string dictionaryAssetName = AssetUtility.GetDictionaryAsset(dictionaryName, false);
-        m_LoadedFlag.Add(dictionaryAssetName, false);
-        GameEntry.Localization.ReadData(dictionaryAssetName, this);
+        string localizationAssetName = AssetUtility.GetLocalizationAsset(dictionaryName, false);
+        m_LoadedFlag.Add(localizationAssetName, false);
+        GameEntry.Localization.ReadData(localizationAssetName, this);
     }
 
     private void LoadFont(string fontName)

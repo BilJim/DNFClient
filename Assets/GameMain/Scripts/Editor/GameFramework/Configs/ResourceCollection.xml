@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UnityGameFramework>
+  <ResourceCollection>
+    <Resources>
+      <Resource Name="Configs" LoadType="0" Packed="True" />
+      <Resource Name="DataTables" LoadType="0" Packed="True" />
+      <Resource Name="Fonts" LoadType="0" Packed="True" />
+      <Resource Name="Localization/Dictionaries" Variant="zh-cn" LoadType="0" Packed="True" />
+      <Resource Name="Prefabs/Hero" LoadType="0" Packed="True" />
+      <Resource Name="Scenes" LoadType="0" Packed="True" />
+      <Resource Name="UI/UIForms" LoadType="0" Packed="True" />
+    </Resources>
+    <Assets>
+      <Asset Guid="112406a5c49ea1d4cac15b738325c35c" ResourceName="Scenes" />
+      <Asset Guid="14869ac0d4433f04db1704e39d03412e" ResourceName="Localization/Dictionaries" ResourceVariant="zh-cn"/>
+      <Asset Guid="186a3c079f981dd4ab1f85338bceea46" ResourceName="DataTables" />
+      <Asset Guid="47aad11b433b6454497cfa88f008977b" ResourceName="UI/UIForms" />
+      <Asset Guid="6572528e62803364bb57de064ee57e62" ResourceName="DataTables" />
+      <Asset Guid="77cbb7c5404c10242ab59953e0746314" ResourceName="Fonts" />
+      <Asset Guid="8ad8c1a49d04489b89e1722562442d78" ResourceName="DataTables" />
+      <Asset Guid="8c04c9a203d033447b3dafc1cf38d1c7" ResourceName="DataTables" />
+      <Asset Guid="9195bdbfbe5488141a813db9da304eb6" ResourceName="DataTables" />
+      <Asset Guid="99f196d33f0667c4181ba2369901e8fa" ResourceName="Scenes" />
+      <Asset Guid="a73df9f8c37946fc85edbf6112e94ebb" ResourceName="Configs" />
+      <Asset Guid="bbada45bf50fd064ca50c6729f182ebd" ResourceName="UI/UIForms" />
+      <Asset Guid="c7f742c08e964fe3b2be82134fc19b02" ResourceName="DataTables" />
+      <Asset Guid="de26ee422178927428a0ae370aafbc49" ResourceName="DataTables" />
+      <Asset Guid="e9af0e4c01074e75adf8ed8029a65140" ResourceName="DataTables" />
+      <Asset Guid="f04e47900029d0f4982f63c6cf34c5de" ResourceName="Prefabs/Hero" />
+    </Assets>
+  </ResourceCollection>
+</UnityGameFramework>

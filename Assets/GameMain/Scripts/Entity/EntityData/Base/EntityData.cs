@@ -19,13 +19,13 @@ public abstract class EntityData
     }
 
     /// <summary>
-    /// 实体编号。
+    /// 实体编号。内存中编号。非数据相关编号
     /// </summary>
     public int Id => m_Id;
 
     /// <summary>
     /// 实体类型编号。
-    /// 即数据表 Entity 中的编号
+    /// 即数据表 Entity 中的编号(ID)
     /// </summary>
     public int TypeId => m_TypeId;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DataTableGeneratorMenu
 {
-    [MenuItem("Game Framework/生成数据表Code和二进制文件", false, 100)]
+    [MenuItem("Game Framework/生成数据表Code和二进制文件(数据表专用)", false, 100)]
     private static void GenerateDataTables()
     {
         //暂未实现对文件的筛选

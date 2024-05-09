@@ -21,12 +21,7 @@ public static class EntityExtension
         entityComponent.AttachEntity(entity.Entity, ownerId, parentTransformPath, userData);
     }
 
-    // public static void ShowMyAircraft(this EntityComponent entityComponent, MyAircraftData data)
-    // {
-    //     entityComponent.ShowEntity(typeof(MyAircraft), "Aircraft", Constant.AssetPriority.MyAircraftAsset, data);
-    // }
-
-    private static void ShowEntity(this EntityComponent entityComponent, Type logicType, string entityGroup,
+    public static void ShowHeroEntity(this EntityComponent entityComponent, Type logicType, string entityGroup,
         int priority, EntityData data)
     {
         if (data == null)
@@ -35,15 +30,15 @@ public static class EntityExtension
             return;
         }
 
-        IDataTable<DTEntity> dtEntity = GameEntry.DataTable.GetDataTable<DTEntity>();
-        DTEntity entityData = dtEntity.GetDataRow(data.TypeId);
-        if (entityData == null)
+        IDataTable<DTHero> dtHero = GameEntry.DataTable.GetDataTable<DTHero>();
+        DTHero heroData = dtHero.GetDataRow(data.TypeId);
+        if (heroData == null)
         {
             Log.Warning("Can not load entity id '{0}' from data table.", data.TypeId.ToString());
             return;
         }
         
-        entityComponent.ShowEntity(data.Id, logicType, entityData.AssetPath, entityGroup,
+        entityComponent.ShowEntity(data.Id, logicType, heroData.AssetPath, entityGroup,
             priority, data);
     }
 

@@ -24,7 +24,7 @@ public class ProcedureSplash : ProcedureBase
         {
             // 单机模式。要加载的AB包资源在 StreamingAssets 下
             Log.Info("Package resource mode detected.");
-            // ChangeState<ProcedureInitResources>(procedureOwner);
+            ChangeState<ProcedureInitResources>(procedureOwner);
         }
         else
         {

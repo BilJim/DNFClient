@@ -75,4 +75,5 @@ crashlytics-build.properties
 .idea
 
 # AssetBundle 打包后的资源文件
-AssetBundle
+AssetBundle/**
+StreamingAssets/**

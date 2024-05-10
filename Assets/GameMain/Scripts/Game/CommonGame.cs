@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityGameFramework.Runtime;
 
 public class CommonGame : GameBase
 {
@@ -10,10 +11,11 @@ public class CommonGame : GameBase
     {
         base.Initialize();
 
-        GameEntry.Entity.ShowHeroEntity(typeof(Hero), "player", Constant.AssetPriority.HeroAsset,
+        //typeId 暂时为 1，后期英雄可选择后再设置为动态的
+        GameEntry.Entity.ShowHeroEntity(typeof(Hero), "Player", Constant.AssetPriority.HeroAsset,
             new HeroData(GameEntry.Entity.GenerateSerialId(), 1)
             {
-                Name = "My Aircraft",
+                Name = GameEntry.DataNode.GetData<VarString>("Player.Name"),
                 Position = Vector3.zero,
             });
         GameOver = false;

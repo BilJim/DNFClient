@@ -39,6 +39,9 @@ public class RoleCreateForm : UGuiForm
 
     public void OnEnterGameButtonClick()
     {
+        IDataNode playerNode = GameEntry.DataNode.GetNode("Player.Name");
+        if (playerNode == null || string.IsNullOrWhiteSpace(GameEntry.DataNode.GetData<VarString>("Player.Name")))
+            return;
         m_ProcedureHall.StartGame();
     }
 

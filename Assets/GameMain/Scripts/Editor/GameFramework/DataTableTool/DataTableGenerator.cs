@@ -18,9 +18,9 @@ public sealed class DataTableGenerator
     //生成的C#代码路径
     private const string CSharpCodePath = "Assets/GameMain/Scripts/DataTable";
     //C#代码模板
-    private const string CSharpCodeTemplateFilePath = "Assets/Editor/DataTableTool/CodeTemplate/DataTableCodeTemplate.txt";
+    private const string CSharpCodeTemplateFilePath = "Assets/GameMain/Scripts/Editor/GameFramework/DataTableTool/CodeTemplate/DataTableCodeTemplate.txt";
     //C#代码模板
-    private const string CSharpCodeTemplateFileWithNamespacePath = "Assets/GameMain/Configs/DataTableCodeTemplate.txt";
+    private const string CSharpCodeTemplateFileWithNamespacePath = "Assets/GameMain/Configs/DataTableTool/CodeTemplate/DataTableCodeTemplate.txt";
     //C#代码文件前缀(此处为DataTable缩写)
     private const string CSharpFilePrefix = "DT";
     //C#代码文件命名空间

@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98acd7d3bd2bf54dadf9644f60e5cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EditorResourceMode: 0
+  m_EditorResourceMode: 1
   m_EditorLanguage: 0
   m_VersionHelperTypeName: UnityGameFramework.Runtime.DefaultVersionHelper
   m_LogHelperTypeName: UnityGameFramework.Runtime.DefaultLogHelper
@@ -592,7 +592,12 @@ MonoBehaviour:
   m_CustomEntityHelper: {fileID: 0}
   m_EntityGroupHelperTypeName: UnityGameFramework.Runtime.DefaultEntityGroupHelper
   m_CustomEntityGroupHelper: {fileID: 0}
-  m_EntityGroups: []
+  m_EntityGroups:
+  - m_Name: Player
+    m_InstanceAutoReleaseInterval: 0
+    m_InstanceCapacity: 0
+    m_InstanceExpireTime: 0
+    m_InstancePriority: 0
 --- !u!114 &1905892396700999006
 MonoBehaviour:
   m_ObjectHideFlags: 0

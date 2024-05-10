@@ -9,6 +9,11 @@ public class Hero : TargetableObject
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
-        m_HeroData.Name = GameEntry.DataNode.GetData<VarString>("Player.Name");
+        m_HeroData = userData as HeroData;
+        if (m_HeroData == null)
+        {
+            Log.Error("Hero data is invalid.");
+            return;
+        }
     }
 }

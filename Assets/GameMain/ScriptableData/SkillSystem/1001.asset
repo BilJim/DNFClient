@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04eedcd1da3452883667a8e1728b880, type: 3}
+  m_Name: 1001
+  m_EditorClassIdentifier: 
+  character:
+    skillCharacter: {fileID: 2438768524617866050, guid: f04e47900029d0f4982f63c6cf34c5de, type: 3}
+    skillAnim: {fileID: 7400000, guid: 4a3916918c4bfd942af61149ea64ab91, type: 2}
+    animProgress: 100
+    isLoopAnim: 0
+    loopTimes: 1
+    logicFrame: 8
+    animLength: 0.53333336
+    skillDurationMs: 533
+  skillCfg:
+    isShowStockPileData: 0
+    isShowSkillGuide: 0
+    skillIcon: {fileID: 0}
+    skillId: 1001
+    skillName: "\u91CC\u9B3C\u5251\u672F-1"
+    needMagicValue: 100
+    skillShakeBeforeTimeMs: 300
+    skillAttackDurationMs: 0
+    skillShakeAfterMs: 400
+    skillCdTimeMs: 3
+    skillType: 0
+    stockPileStageData: []
+    skillGuideObj: {fileID: 0}
+    skillGuideRange: 0
+    combinationSkillId: 0
+    skillHitEffect: {fileID: 0}
+    skillHitEffectPath: 
+    hitEffectSurvivalTimeMs: 100
+    skillHitAudio: {fileID: 0}
+    isShowSkillPortrait: 0
+    skillPortraitObj: {fileID: 0}
+    skillDes: 
+  damageCfgList:
+  - triggerFrame: 1
+    endFrame: 2
+    triggerIntervalMs: 0
+    isFollowEffect: 0
+    damageType: 0
+    damageRate: 0
+    detectionMode: 2
+    boxSize: {x: 1, y: 1, z: 1}
+    boxOffset: {x: 0, y: 0, z: 0}
+    sphereOffset: {x: 0, y: 0.9, z: 0}
+    radius: 1
+    radiusHeight: 0
+    colliderPosType: 0
+    targetType: 0
+    addBuffs: 
+    triggerSkillId: 0
+  effectCfgList:
+  - skillEffect: {fileID: 1845321840847504, guid: 44a74021eecfb9146a56c08aaf437597, type: 3}
+    skillEffectPath: 
+    triggerFrame: 1
+    endFrame: 8
+    effectOffsetPos: {x: 0, y: 0, z: 0}
+    effectPosType: 0
+    isSetTransParent: 0
+    transParent: 0
+    isAttachDamage: 0
+    damageConfig:
+      triggerFrame: 0
+      endFrame: 0
+      triggerIntervalMs: 0
+      isFollowEffect: 0
+      damageType: 0
+      damageRate: 0
+      detectionMode: 0
+      boxSize: {x: 1, y: 1, z: 1}
+      boxOffset: {x: 0, y: 0, z: 0}
+      sphereOffset: {x: 0, y: 0.9, z: 0}
+      radius: 1
+      radiusHeight: 0
+      colliderPosType: 0
+      targetType: 0
+      addBuffs: 
+      triggerSkillId: 0
+    isAttachAction: 0

@@ -20,6 +20,7 @@ public abstract class EntityData
 
     /// <summary>
     /// 实体编号。内存中编号。非数据相关编号
+    /// EntityComponent 通过该编号获取对应的实体
     /// </summary>
     public int Id => m_Id;
 

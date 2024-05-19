@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-public class Hero : TargetableObject
+public class HeroLogic : TargetableObject
 {
     [SerializeField] private HeroData m_HeroData = null;
 

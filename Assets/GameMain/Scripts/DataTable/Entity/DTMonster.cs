@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2024-05-18 23:32:07.067
+// 生成时间：2024-05-18 23:29:49.029
 //------------------------------------------------------------
 
 using GameFramework;
@@ -12,14 +12,14 @@ using UnityEngine;
 using UnityGameFramework.Runtime;
 
 /// <summary>
-/// 数据表。
+/// 实体表。
 /// </summary>
-public class DTBaseTable : DataRowBase
+public class DTMonster : DataRowBase
 {
     private int m_Id = 0;
 
     /// <summary>
-    /// 获取编号。
+    /// 获取实体编号。
     /// </summary>
     public override int Id
     {
@@ -30,9 +30,45 @@ public class DTBaseTable : DataRowBase
     }
 
 	/// <summary>
-	/// 获取要加载的数据表。
+	/// 获取资源名称。
 	/// </summary>
-	public List<string> TableNames
+	public string AssetName
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取资源地址(相对路径)。
+	/// </summary>
+	public string AssetPath
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取出生点。
+	/// </summary>
+	public Vector3 BornPosition
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取碰撞体中心点。
+	/// </summary>
+	public Vector3 ColliderCenter
+	{
+		get;
+		private set;
+	}
+
+	/// <summary>
+	/// 获取碰撞体Size。
+	/// </summary>
+	public Vector3 ColliderSize
 	{
 		get;
 		private set;
@@ -50,7 +86,11 @@ public class DTBaseTable : DataRowBase
 		index++;
 		m_Id = int.Parse(columnStrings[index++]);
 		index++;
-		TableNames = DataTableExtension.ParseStringList(columnStrings[index++]);
+		AssetName = columnStrings[index++];
+		AssetPath = columnStrings[index++];
+		BornPosition = DataTableExtension.ParseVector3(columnStrings[index++]);
+		ColliderCenter = DataTableExtension.ParseVector3(columnStrings[index++]);
+		ColliderSize = DataTableExtension.ParseVector3(columnStrings[index++]);
 
 		GeneratePropertyArray();
 		return true;
@@ -63,7 +103,11 @@ public class DTBaseTable : DataRowBase
 			using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
 			{
 				m_Id = binaryReader.Read7BitEncodedInt32();
-				TableNames = binaryReader.ReadStringList();
+				AssetName = binaryReader.ReadString();
+				AssetPath = binaryReader.ReadString();
+				BornPosition = binaryReader.ReadVector3();
+				ColliderCenter = binaryReader.ReadVector3();
+				ColliderSize = binaryReader.ReadVector3();
 			}
 		}
 

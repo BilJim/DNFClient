@@ -6,18 +6,15 @@ using UnityEngine.Serialization;
 [ExecuteInEditMode]
 public class BoxColliderGizmo : MonoBehaviour
 {
-    BoxCollider colliders;
+    BoxCollider collider;
     public Vector3 mCenter;
     public Vector3 mSize;
     void Start()
     {
-        return;
         CreateLineMaterial();
-        colliders = gameObject.GetComponent<BoxCollider>();
-        if (colliders == null)
-        {
+        collider = gameObject.GetComponent<BoxCollider>();
+        if (collider == null)
             return;
-        }
     }
 
     public void SetBoxData(Vector3 center, Vector3 size, bool isFollowTarget = false)
@@ -28,7 +25,7 @@ public class BoxColliderGizmo : MonoBehaviour
     
     void OnRenderObject()
     {
-        return;
+        // return;
         if (lineMaterial!=null)
         {
             lineMaterial.SetPass(0);

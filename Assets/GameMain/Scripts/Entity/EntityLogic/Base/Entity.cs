@@ -1,4 +1,6 @@
-﻿using GameFramework;
+﻿using FixIntPhysics;
+using FixMath;
+using GameFramework;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
@@ -12,6 +14,24 @@ public abstract class Entity : EntityLogic
     [SerializeField] private EntityData m_EntityData = null;
 
     public int Id => Entity.Id;
+
+    //逻辑位置
+    public FixIntVector3 pos;
+
+    //逻辑朝向
+    public FixIntVector3 dir;
+
+    //逻辑角度
+    public FixIntVector3 angle;
+
+    //逻辑移动速度
+    public FixInt moveSpeed;
+
+    //逻辑轴向
+    public FixInt axis = 1;
+
+    //逻辑是否激活
+    public bool isActive;
 
     public Animation CachedAnimation { get; private set; }
 

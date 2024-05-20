@@ -2213,6 +2213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4941176501443072}
   - component: {fileID: 111377722698973100}
+  - component: {fileID: 2730860335739226435}
   m_Layer: 0
   m_Name: 1001
   m_TagString: Untagged
@@ -2260,6 +2261,18 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &2730860335739226435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655574422363594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b83f98551744ffa154a46d9d46c8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1667065152575688
 GameObject:
   m_ObjectHideFlags: 0

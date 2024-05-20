@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FixIntPhysics;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 
 /// <summary>
@@ -7,6 +8,15 @@ using UnityGameFramework.Runtime;
 public abstract class TargetableObject : Entity
 {
     [SerializeField] private TargetableObjectData m_TargetableObjectData = null;
+
+    //渲染对象
+    public EntityRender RenderObj { get; protected set; }
+
+    //定点碰撞体
+    public ColliderBehaviour Collider { get; protected set; }
+
+    //定点碰撞体
+    public EntityStatus Status { get; set; }
 
     /// <summary>
     /// 是否死亡

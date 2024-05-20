@@ -13,6 +13,7 @@ public class CommonGame : GameBase
         LoadHero();
         LoadMonster();
         
+        OpenOperateUI();
         GameOver = false;
     }
 
@@ -48,6 +49,7 @@ public class CommonGame : GameBase
             GameEntry.Entity.ShowEntity(GameEntry.Entity.GenerateSerialId(), typeof(MonsterLogic), dtMonster.AssetPath, "Monster", Constant.AssetPriority.MonsterAsset, 
                 new MonsterData(GameEntry.Entity.GenerateSerialId(), dtMonster.Id)
                 {
+                    bornPosition = dtMonster.BornPosition,
                     colliderCenter = dtMonster.ColliderCenter,
                     colliderSize = dtMonster.ColliderSize
                 });

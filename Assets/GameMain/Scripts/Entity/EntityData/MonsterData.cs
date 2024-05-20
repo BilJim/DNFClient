@@ -4,18 +4,20 @@ using UnityEngine;
 [Serializable]
 public class MonsterData : TargetableObjectData
 {
-
     /// <summary>
     /// 获取碰撞体中心点。
     /// </summary>
-    [HideInInspector]
-    public Vector3 colliderCenter;
+    [HideInInspector] public Vector3 colliderCenter;
 
     /// <summary>
     /// 获取碰撞体Size。
     /// </summary>
-    [HideInInspector]
-    public Vector3 colliderSize;
+    [HideInInspector] public Vector3 colliderSize;
+
+    /// <summary>
+    /// 获取出生点。
+    /// </summary>
+    [HideInInspector] public Vector3 bornPosition;
 
     public MonsterData(int entityId, int typeId)
         : base(entityId, typeId, CampType.Enemy)
